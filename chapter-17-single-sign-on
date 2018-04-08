@@ -1,11 +1,14 @@
 1. LDAP stands for Lightweight Directory Access Protocol.
 
-2. Because without it, users that require access to multiple workstations create additional overhead for IT, and themselves as a result. In turn, this creates permissions mismatches across the board due to human error.
+2. Because without it, users that require access to multiple workstations create additional overhead for IT, and themselves as a result. 
+In turn, this creates permissions mismatches across the board due to human error.
 
 3. It enables single sign-on for users. A user can log into a number of workstations with their credentials, rather than only a single one.
  
 4. Kerberos is an authentication system based on tickets and symmetric key cryptography. Windows uses it.
 
-5. Most security-minded individuals are split between Kerberos and LDAP in terms of which is more secure. Due to this, Kerberos can often be found in production environments. If workstations in the production environment are hooked into Active Directory, then the question of Kerberos versus LDAP is already solved.
+5. Most security-minded individuals are split between Kerberos and LDAP in terms of which is more secure. 
+Due to this, Kerberos can often be found in production environments. 
+If workstations in the production environment are hooked into Active Directory, then the question of Kerberos versus LDAP is already solved.
 
 6. It's an authorization method that helps harden user logon sessions, making password interception a much more difficult matter.
