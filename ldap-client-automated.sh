@@ -15,6 +15,8 @@ sed -i 's/compat/compat ldap/g' /etc/nsswitch.conf
 
 getent passwd
 
+unset DEBIAN_FRONTEND
+
 #Just in case.
 #sed -i 's,uri ldapi:///,uri ldap://10.142.0.2,g' /etc/ldap.conf
 #sed -i 's/base dc=example,dc=net/base dc=nti310,dc=local/g' /etc/ldap.conf
