@@ -13,7 +13,9 @@ sed -i 's/compat/compat ldap/g' /etc/nsswitch.conf
 
 /etc/init.d/nscd restart
 
-getent passwd
+sed -i 's/PasswordAuthentication no/PasswordAuthentication Yes/g' /etc/ssh/sshd_config
+
+/etc/init.d/ssh restart
 
 export DEBIAN_FRONTEND=interactive
 
