@@ -2,7 +2,7 @@
 
 
 export DEBIAN_FRONTEND=noninteractive
-apt-get debconf-utils -y
+apt-get --yes install libpam-ldap nscd
 wget https://raw.githubusercontent.com/Tedtanium/nti-310-linux-enterprise-applications/master/ldap_debconf
 
 while read line; do echo "$line" | debconf-set-selections; done < ldap_debconf
