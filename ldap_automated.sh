@@ -1,6 +1,6 @@
 #!/bin/bash
 yum install git -y
-git clone https://github.com/nic-instruction/NTI-310.git
+git clone https://github.com/nic-instruction/hello-nti-310.git
 
 yum install -y openldap-servers openldap-clients
 
