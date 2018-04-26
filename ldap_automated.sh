@@ -29,7 +29,7 @@ echo "Preparing to take over the world..."
 
 #Password generation.
 
-newsecret=$)slappasswd -g)
+newsecret=$(slappasswd -g)
 newhash=$(slappasswd -s "$newsecret")
 echo -n "$newsecret" > /root/ldap_admin_pass
 chmod 0600 /root/ldap_admin_pass
@@ -100,3 +100,5 @@ objectClass: organizationalUnit
 ou: Group" > base.ldif
 
 ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif -y /root/ldap_admin_pass
+
+#Use [cat /root/ldap_admin_pass] to retrieve the password for use in the web interface.
