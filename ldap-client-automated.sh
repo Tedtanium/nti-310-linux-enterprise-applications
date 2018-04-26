@@ -11,11 +11,9 @@ apt-get install -y libpam-ldap nscd
 
 sed -i 's/compat/compat ldap/g' /etc/nsswitch.conf
 
-/etc/init.d/nscd restart
-
 sed -i 's/PasswordAuthentication no/PasswordAuthentication Yes/g' /etc/ssh/sshd_config
 
-/etc/init.d/ssh restart
+/etc/init.d/nscd restart
 
 export DEBIAN_FRONTEND=interactive
 
