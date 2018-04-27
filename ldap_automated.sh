@@ -49,7 +49,7 @@ changetype: modify
 replace: olcRootPW
 olcRootPW: $newhash" >> db.ldif
 
-$Auth restriction.
+#Auth restriction.
 
 echo 'dn: olcDatabase={1}monitor,cn=config
 changetype: modify
