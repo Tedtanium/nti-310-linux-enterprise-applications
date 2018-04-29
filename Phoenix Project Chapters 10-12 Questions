@@ -1,0 +1,5 @@
+1. WIP reduction.
+2. Someone in logistics, for a production database failure fix. 
+3. They assigned other high-level engineers to attempt to dissipate the knowledge siphon that Brent created as the go-to guy.
+4. They usually relied on Brent, who was taken off of assisting with anything not directly related to Phoenix.
+5. Indexing had been started on the database backend, causing the rollout of Phoenix to take far, far longer than originally anticipated. As such, it wasn't ready by the time it was needed.
