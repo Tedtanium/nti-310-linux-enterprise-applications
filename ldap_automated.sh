@@ -38,12 +38,12 @@ echo "dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcSuffix
 olcSuffix: dc=nti310,dc=local
-
+\n
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcRootDN
 olcRootDN: cn=ldapadm,dc=nti310,dc=local
-
+\n
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcRootPW
