@@ -25,5 +25,6 @@ sed -i 's/base dc=example,dc=net/base dc=nti310,dc=local/g' /etc/ldap.conf
 #NFS client starts here.
 
 apt-get install nfs-client -y
+yum install nfs-client -y
 mkdir /mnt/test 
 echo "10.142.0.7:/var/nfsshare/testing        /mnt/test       nfs     defaults 0 0" >> /etc/fstab
