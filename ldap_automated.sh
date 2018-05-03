@@ -47,7 +47,9 @@ olcRootDN: cn=ldapadm,dc=nti310,dc=local
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcRootPW
-olcRootPW: $newhash" >> db.ldif
+olcRootPW: $newhash" > db.ldif
+
+ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
 
 #Auth restriction.
 
@@ -85,21 +87,26 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
 
 #Adds base group and people structure.
 
-echo "dn: dc=nti310,dc=local
+echo -e "dn: dc=nti310,dc=local
 dc: nti310
 objectClass: top
 objectClass: domain
+\n
 dn: cn=ldapadm ,dc=nti310,dc=local
 objectClass: organizationalRole
 cn: ldapadm
 description: LDAP Manager
+\n
 dn: ou=People,dc=nti310,dc=local
 objectClass: organizationalUnit
 ou: People
+\n
 dn: ou=Group,dc=nti310,dc=local
 objectClass: organizationalUnit
 ou: Group" > base.ldif
 
 ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif -y /root/ldap_admin_pass
+
+setenforce 0
 
 #Use [cat /root/ldap_admin_pass] to retrieve the password for use in the web interface.
