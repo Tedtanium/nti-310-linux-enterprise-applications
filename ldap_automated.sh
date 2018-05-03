@@ -109,9 +109,11 @@ dn: ou=Group,dc=nti310,dc=local
 objectClass: organizationalUnit
 ou: Group" > base.ldif
 
+setenforce 0
+
 ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif -y /root/ldap_admin_pass
 
-setenforce 0
+
 
 systemctl restart httpd
 
