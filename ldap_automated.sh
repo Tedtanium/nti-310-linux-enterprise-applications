@@ -19,7 +19,7 @@ setsebool -P httpd_can_connect_ldap on
 
 sed -i 's,Require local,#Require local\n   Require all granted,g' /etc/httpd/conf.d/phpldapadmin.conf
 
-cp NTI-310/config/config.php /etc/phpldapadmin/config.php -y
+cp hello-nti-310/config/config.php /etc/phpldapadmin/config.php -y
 chown ldap:apache /etc/phpldapadmin/config.php
 
 systemctl restart httpd.service
