@@ -34,7 +34,7 @@ newhash=$(slappasswd -s "$newsecret")
 echo -n "$newsecret" > /root/ldap_admin_pass
 chmod 0600 /root/ldap_admin_pass
 
-echo "dn: olcDatabase={2}hdb,cn=config
+echo -e "dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcSuffix
 olcSuffix: dc=nti310,dc=local
@@ -64,10 +64,11 @@ openssl req -new -x509 -nodes -out /etc/openldap/certs/nti310ldapcert.pem -keyou
 
 chown -R ldap. /etc/openldap/certs/nti*.pem
 
-echo "dn: cn=config
+echo -e "dn: cn=config
 changetype: modify
 replace: olcTLSCertificateFile
 olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem
+\n
 dn: cn=config
 changetype: modify
 replace: olcTLSCertificateKeyFile
