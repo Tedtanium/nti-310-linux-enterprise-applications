@@ -1,0 +1,7 @@
+1. A number of noteworthy differences in our code included the use of user input within the shell (stored variable for NFS server IP input on client). Our LDAP server installs were very, very similar, however, with just a few select details out of order. One noteworthy thing done with the IP retrieval method from the NFS server she used was pulling the internal IP from within the instance using ifconfig and storing it as a variable.
+
+2. Wait a minute... There's not really an answer for this question.
+
+3. LDAP server login worked, NFS worked fine in both regards (though took manual configuration within the shell), but getent failed to produce the new users added. Might just be a sync non/issue.
+
+4. There is nothing I can tell that she is missing, based on my code.
