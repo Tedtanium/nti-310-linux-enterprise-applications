@@ -8,13 +8,15 @@ postgresql-setup initdb
 systemctl start postgresql
 
 #Refer to https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-centos-7 for use on sed in the future.
-#Experimental: sed -i.bak 's/ident/md5/g' /var/lib/pgsql/data/pg_hba.conf
+sed -i.bak 's/ident/md5/g' /var/lib/pgsql/data/pg_hba.conf
 
 systemctl restart postgresql
 systemctl enable postgresql
 
 su - postgres
 psql
+
+#Going to require an echo statement here before turn-in.
 CREATE DATABASE myproject;
 CREATE USER myprojectuser WITH PASSWORD 'password';
 
@@ -27,16 +29,17 @@ GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;
 \q
 exit
 
-pip install virtualenv
+#Django begins here.
+#pip install virtualenv
 
-mkdir /myproject
-cd /myproject
+#mkdir /myproject
+#cd /myproject
 
-virtualenv myprojectenv
-source myprojectenv/bin/activate
+#virtualenv myprojectenv
+#source myprojectenv/bin/activate
 
-pip install django psycopg2
+#pip install django psycopg2
 
-django-admin.py startproject myproject .
+#django-admin.py startproject myproject .
 
 #Stopped at "Configure the Django Database Settings".
