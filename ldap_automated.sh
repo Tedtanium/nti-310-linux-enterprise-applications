@@ -109,4 +109,7 @@ ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif -y /root/ldap_admi
 
 setenforce 0
 
+systemctl restart httpd
+
+
 #Use [cat /root/ldap_admin_pass] to retrieve the password for use in the web interface.
