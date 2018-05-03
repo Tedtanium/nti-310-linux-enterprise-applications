@@ -19,6 +19,8 @@ setsebool -P httpd_can_connect_ldap on
 
 sed -i 's,Require local,#Require local\n   Require all granted,g' /etc/httpd/conf.d/phpldapadmin.conf
 
+unalias cp
+
 cp hello-nti-310/config/config.php /etc/phpldapadmin/config.php -y
 chown ldap:apache /etc/phpldapadmin/config.php
 
@@ -78,7 +80,6 @@ olcTLSCertificateKeyFile: /etc/openldap/certs/nti310ldapkey.pem" > certs.ldif
 
 ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
 
-unalias cp
 
 
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif
