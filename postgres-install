@@ -10,24 +10,32 @@ systemctl start postgresql
 #Refer to https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-centos-7 for use on sed in the future.
 sed -i.bak 's/ident/md5/g' /var/lib/pgsql/data/pg_hba.conf
 
-systemctl restart postgresql
+systemctl start postgresql
 systemctl enable postgresql
 
-su - postgres
-psql
+#su - postgres
+#psql
 
-#Going to require an echo statement here before turn-in.
-CREATE DATABASE myproject;
+
+echo -e "CREATE DATABASE myproject;
+\n
 CREATE USER myprojectuser WITH PASSWORD 'password';
-
+\n
 ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+\n
 ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+\n
 ALTER ROLE myprojectuser SET timezone TO 'UTC';
 
-GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;
+GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;" > sqlfile.sql
 
-\q
-exit
+sudo -i -u postgres psql -U postgres -f /sqlfile.sql
+
+systemctl restart postgresql
+
+systemctl start postgresql
+#\q
+#exit
 
 #Django begins here.
 #pip install virtualenv
