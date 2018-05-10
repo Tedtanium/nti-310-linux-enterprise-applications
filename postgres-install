@@ -45,6 +45,9 @@ sed -i 's/$conf\['\''extra_login_security'\''\] = true;/$conf\['\''extra_login_s
 #ip/phpPgAdmin Usr: postgres PW: postgres
 setenforce 0
 
+systemctl start httpd
+systemctl enable httpd
+
 #\q
 #exit
 
