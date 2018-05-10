@@ -43,7 +43,7 @@ sed -i 's/Allow from 127.0.0.1/Allow from all/g' /etc/httpd/conf.d/phpPgAdmin.co
 
 sed -i 's/$conf\['\''extra_login_security'\''\] = true;/$conf\['\''extra_login_security'\''\] = false;/g' /etc/phpPgAdmin/config.inc.php
 #ip/phpPgAdmin Usr: postgres PW: postgres
-
+setenforce 0
 
 #\q
 #exit
