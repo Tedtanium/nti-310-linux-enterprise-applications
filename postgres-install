@@ -45,6 +45,8 @@ sed -i 's/$conf\['\''extra_login_security'\''\] = true;/$conf\['\''extra_login_s
 #ip/phpPgAdmin Usr: postgres PW: postgres
 setenforce 0
 
+#vim /var/lib/pgsql/data/pg_hba.conf ----> Edit "peer" to md5 in "local   all             all                                     peer"
+
 systemctl start httpd
 systemctl enable httpd
 
