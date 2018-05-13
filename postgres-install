@@ -46,6 +46,8 @@ sed -i 's/$conf\['\''extra_login_security'\''\] = true;/$conf\['\''extra_login_s
 setenforce 0
 
 #vim /var/lib/pgsql/data/pg_hba.conf ----> Edit "peer" to md5 in "local   all             all                                     peer"
+sed -i 's/local   all             all                                     peer/local   all             all                                     md5/g' /var/lib/pgsql/data/pg_hba.conf
+
 
 systemctl start httpd
 systemctl enable httpd
