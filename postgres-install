@@ -26,7 +26,8 @@ ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
 ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
 \n
 ALTER ROLE myprojectuser SET timezone TO 'UTC';
-
+\n
+ALTER USER postgres WITH PASSWORD 'P@ssw0rd1';
 GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;" > sqlfile.sql
 
 sudo -i -u postgres psql -U postgres -f /sqlfile.sql
