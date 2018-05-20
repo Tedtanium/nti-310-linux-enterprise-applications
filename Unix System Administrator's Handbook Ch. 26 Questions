@@ -1,0 +1,14 @@
+* What is the difference between between continuous integration and continuous delivery?
+ Continuous integration is where team members frequently integrate work (shared codebase), and continuous delivery is where small but frequent iterations are delivered to live systems that can easily be rolled back and troubleshooted should they fail.
+
+* What does continuous integration give programmers?  What does continuous delivery allow programmers to do?
+ Programmers don't have to worry about their code getting hung up for lengthy periods of time after moving it onto the next step in an environment that supports continuous delivery. They're also able to send it down when they feel it's ready (but are encouraged to push frequently). Continuous integration allows for fewer bottlenecks and hitches dependent on other people with different schedules.
+
+* What does Automate end-to-end mean in this context?
+ The only steps that are performed by a human are creating code and pushing code, outside of quick bugfixing.
+ 
+* What's the purpose of a dev, stage and prod server?
+ The dev stage is for integration of code and for testing changes to the infrastructure. Generally the most volatile. Staging is purely for testing, but includes software updates, and production is what provides service to the end user.
+ 
+* What is environment parity?
+ The exercise of keeping dev and stage servers similar to production ones in order to reduce unforseen problems brought on by incompatibility or scaling problems.
