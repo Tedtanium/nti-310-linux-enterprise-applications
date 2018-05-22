@@ -13,8 +13,7 @@ source myprojectenv/bin/activate
 
 #vim myproject/settings.py
 #Look into notes to find what to edit via sed (probably IP address info grepped with Gcloud API).
-sed -i 's|'\''HOST'\'': '\'''\''|'\''HOST'\'': '\''"/ip.txt"'\''|g' /opt/myproject/myproject/settings.py
-# ^ Currently BROKEN!
+sed -i "s|'HOST': ''|'HOST': '${djangoip}'|g" /opt/myproject/myproject/settings.py
 sed -i 's/'\''PORT'\'': '\'''\''/'\''PORT'\'': '\''5432'\''/g' /opt/myproject/myproject/settings.py
 
 python manage.py migrate
