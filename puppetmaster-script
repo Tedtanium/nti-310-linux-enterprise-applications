@@ -2,13 +2,17 @@
 gcloud init
 1
 nti-310-200201
-djangoip=$(gcloud compute instances list | grep postgres | awk '{print $4}')
+
 
 yum install wget -y
 wget https://github.com/Tedtanium/nti-310-linux-enterprise-applications/raw/master/postgres-install
 wget https://github.com/Tedtanium/nti-310-linux-enterprise-applications/raw/master/django-server-auto.sh
 
+
 bash postgres-install
+
+djangoip=$(gcloud compute instances list | grep postgres | awk '{print $4}')
+
 bash django-server-auto.sh
 
 #WIP.
