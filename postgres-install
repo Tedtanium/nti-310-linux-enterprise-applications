@@ -1,5 +1,5 @@
 #!/bin/bash
-
+if [ -e /var/lib/pgsql/data/pg_hba.conf ]; then exit 0; fi
 #Installs python package manager, GNU compiler, and Postgres.
 yum install python-pip python-devel gcc postgresql-server postgresql-devel postgresql-contrib -y
 
