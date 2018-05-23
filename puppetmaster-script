@@ -1,4 +1,6 @@
 #!/bin/bash
+if [ -e /django-server-auto.sh ]; then exit 0; fi
+
 gcloud init
 1
 nti-310-200201
@@ -9,10 +11,19 @@ wget https://github.com/Tedtanium/nti-310-linux-enterprise-applications/raw/mast
 wget https://github.com/Tedtanium/nti-310-linux-enterprise-applications/raw/master/django-server-auto.sh
 
 
-bash postgres-install
+gcloud compute firewall-rules create httpenable --allow tcp:80
+# ^ Still busted -- May need a different command to enable HTTP access.
+gcloud compute instances create postgres-a --metadata-from-file postgres=/postgres-install --image-family=centos-7 --tags httpenable --zone us-east1-b
 
-djangoip=$(gcloud compute instances list | grep postgres | awk '{print $4}')
+gcloud compute instances create django-a --metadata-from-file django=/django-server-auto.sh --image-family=centos-7 --tags httpenable --zone us-east1-b
 
-bash django-server-auto.sh
+
+#--image-project=centos-cloud
+
+#postgres-install
+
+#djangoip=$(gcloud compute instances list | grep postgres | awk '{print $4}')
+# ^ No longer needed. This function is now handled from within the django script itself without Google API.
+#django-server-auto.sh
 
 #WIP.
