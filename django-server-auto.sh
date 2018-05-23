@@ -17,6 +17,8 @@ django-admin.py startproject myproject /opt/myproject
 
 mv /opt/myproject/myproject/settings.py /opt/myproject/myproject/settings.py.bak
 wget https://raw.githubusercontent.com/Tedtanium/nti-310-linux-enterprise-applications/master/django-thing/settings.py --directory-prefix=/opt/myproject/myproject/settings.py
+
+djangoip=$(getent hosts postgres-a.c.nti-310-200201.internal | awk '{ print $1 }')
 sed -i "s|'HOST': '1.2.3.4'|'HOST': '${djangoip}'|g" /opt/myproject/myproject/settings.py
 #How is $djangoip transferred from the master server to here?
 
