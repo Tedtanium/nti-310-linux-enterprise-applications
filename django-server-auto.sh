@@ -1,5 +1,7 @@
 #!/bin/bash
 
+if [ -e opt/myproject/myproject/settings.py ]; then exit 0; fi
+
 yum install python-pip -y
 pip install virtualenv
 pip install --upgrade pip
