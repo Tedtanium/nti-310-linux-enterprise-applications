@@ -21,7 +21,7 @@ git clone https://github.com/Tedtanium/nti-310-linux-enterprise-applications.git
 #A variable will be collected: $LDAPIP
 
 #Execution line.
-gcloud compute instances create ldap-server --metadata-from-file --image=centos-7 --tags http-server --zone us-east1-b
+gcloud compute instances create ldap-server	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/ldap-server.sh --image-family centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 # ^ Needs a few things: Paths to file, type of instance (need to make it a micro), firewall rules.
 
 LDAP=$(getent hosts ldap-server.c.nti-310-200201.internal | awk '{ print $1 }')
