@@ -8,7 +8,7 @@ postgresql-setup initdb
 systemctl start postgresql
 
 #Refer to https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-centos-7 for use on sed in the future.
-sed -i.bak 's/ident/md5/g' /var/lib/pgsql/data/pg_hba.conf
+
 
 systemctl start postgresql
 systemctl enable postgresql
@@ -32,8 +32,11 @@ GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;" > sqlfile.sql
 
 sudo -i -u postgres psql -U postgres -f /sqlfile.sql
 
-systemctl restart postgresql
+sed -i.bak 's/ident/md5/g' /var/lib/pgsql/data/pg_hba.conf
 
+systemctl start httpd
+systemctl enable httpd
+systemctl restart postgresql
 systemctl start postgresql
 
 yum install phpPgAdmin -y
@@ -50,8 +53,6 @@ setenforce 0
 sed -i 's/local   all             all                                     peer/local   all             all                                     md5/g' /var/lib/pgsql/data/pg_hba.conf
 
 
-systemctl start httpd
-systemctl enable httpd
 
 #\q
 #exit
