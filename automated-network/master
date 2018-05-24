@@ -73,7 +73,7 @@ POSTGRESIP=$(getent hosts postgres.c.nti-310-200201.internal | awk '{ print $1 }
 #Target file: automated-network/django
 #A variable will be needed: $POSTGRESIP
 
-
+#Additional edits will have to be made to this script (settings.py cannot rely on external file).
 #sed line - should replace all instances of POSTGRESIP with $POSTGRESIP.
 
 #Execution line.
