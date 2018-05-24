@@ -11,7 +11,9 @@ wget https://github.com/Tedtanium/nti-310-linux-enterprise-applications/raw/mast
 wget https://github.com/Tedtanium/nti-310-linux-enterprise-applications/raw/master/django-server-auto.sh
 
 
-gcloud compute firewall-rules create httpenable --allow tcp:80
+#gcloud compute firewall-rules create httpenable --allow tcp:80
+gcloud compute firewall-rules create httpenable --allow tcp:80;tcp:8000
+
 # ^ Still busted -- May need a different command to enable HTTP access.
 gcloud compute instances create postgres-a --metadata-from-file postgres=/postgres-install --image-family=centos-7 --tags httpenable --zone us-east1-b
 
