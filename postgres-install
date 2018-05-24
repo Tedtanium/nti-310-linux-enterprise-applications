@@ -6,12 +6,11 @@ yum install python-pip python-devel gcc postgresql-server postgresql-devel postg
 postgresql-setup initdb
 
 systemctl start postgresql
+systemctl enable postgresql
 
 #Refer to https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-centos-7 for use on sed in the future.
 
 
-systemctl start postgresql
-systemctl enable postgresql
 
 #su - postgres
 #psql
@@ -40,9 +39,6 @@ systemctl enable httpd
 systemctl start postgresql
 systemctl enable postgresql
 
-sed -i 's/Require local/Require all granted/g' /etc/httpd/conf.d/phpPgAdmin.conf
-
-sed -i 's/Allow from 127.0.0.1/Allow from all/g' /etc/httpd/conf.d/phpPgAdmin.conf
 
 
 
@@ -50,8 +46,13 @@ sed -i 's/Allow from 127.0.0.1/Allow from all/g' /etc/httpd/conf.d/phpPgAdmin.co
 yum install phpPgAdmin -y
 
 sed -i 's/$conf\['\''extra_login_security'\''\] = true;/$conf\['\''extra_login_security'\''\] = false;/g' /etc/phpPgAdmin/config.inc.php
-#ip/phpPgAdmin Usr: postgres PW: postgres
+#ip/phpPgAdmin Usr: postgres PW: P@ssw0rd1
 setenforce 0
+
+sed -i 's/Require local/Require all granted/g' /etc/httpd/conf.d/phpPgAdmin.conf
+
+sed -i 's/Allow from 127.0.0.1/Allow from all/g' /etc/httpd/conf.d/phpPgAdmin.conf
+
 
 systemctl restart httpd
 systemctl restart postgresql
