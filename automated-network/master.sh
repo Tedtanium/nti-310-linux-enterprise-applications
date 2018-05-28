@@ -41,7 +41,7 @@ sed -i "s/LDAPIP/$LDAPIP/g" *.*
 
 
 #Execution line.
-gcloud compute instances create nfs-server	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/nfs-server.sh --image-family centos-7 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+gcloud compute instances create nfs-server	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/nfs-server.sh --image centos-7 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 
 NFS=$(getent hosts nfs-server.c.nti-310-200201.internal | awk '{ print $1 }')
 
@@ -61,7 +61,7 @@ sed -i "s/NFSIP/$NFSIP/g" *.*
 
 
 #Execution line.
-gcloud compute instances create client	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image-family ubuntu --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+gcloud compute instances create client	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image ubuntu --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 # ^ Needs changing - CentOS => Ubuntu.
 
 ############ POSTGRES ####################
@@ -70,7 +70,7 @@ gcloud compute instances create client	--metadata-from-file startup-script=nti-3
 #A variable will be collected: $POSTGRESIP
 
 #Execution line.
-gcloud compute instances create postgres	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/postgres.sh --image-family centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+gcloud compute instances create postgres	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/postgres.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 
 POSTGRESIP=$(getent hosts postgres.c.nti-310-200201.internal | awk '{ print $1 }')
 
@@ -85,5 +85,5 @@ POSTGRESIP=$(getent hosts postgres.c.nti-310-200201.internal | awk '{ print $1 }
 sed -i "s/POSTGRESIP/$POSTGRESIP/g" *.*
 
 #Execution line.
-gcloud compute instances create django	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/django.sh --image-family centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+gcloud compute instances create django	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/django.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 # ^ Needs firewall rules, for port 8000.
