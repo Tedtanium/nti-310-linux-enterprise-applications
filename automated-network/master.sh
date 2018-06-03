@@ -29,7 +29,7 @@ LDAP=$(getent hosts ldap-server.c.nti-310-200201.internal | awk '{ print $1 }')
 
 
 #Verifies that the variable is being stored.
-echo $LDAP > test.sh
+echo $LDAP > ldapip.sh
 
 
 
@@ -39,14 +39,13 @@ echo $LDAP > test.sh
 #A variable will be needed: $LDAPIP
 #A variable will be collected: $NFSIP
 
-#sed line - should replace all instances of LDAPIP with $LDAPIP.
-#sed -i "s/LDAPIP/$LDAPIP/g" *.*
-
 
 #Execution line.
-#gcloud compute instances create nfs-server	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/nfs-server.sh --image centos-7 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+gcloud compute instances create nfs-server	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/nfs-server.sh --image centos-7 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 
-#NFS=$(getent hosts nfs-server.c.nti-310-200201.internal | awk '{ print $1 }')
+NFS=$(getent hosts nfs-server.c.nti-310-200201.internal | awk '{ print $1 }')
+
+echo $NFS > nfsip.sh
 
 
 
@@ -59,10 +58,10 @@ echo $LDAP > test.sh
 #Note to self: Debconf MUST be integrated into client install! Made independently of the LDAP server.
 
 #sed line - should replace all instances of LDAPIP with $LDAPIP.
-#sed -i "s/LDAPIP/$LDAPIP/g" *.*
+sed -i "s/LDAPIP/$LDAPIP/g" *.*
 
 #sed line - should replace all instances of NFSIP with $NFSIP.
-#sed -i "s/NFSIP/$NFSIP/g" *.*
+sed -i "s/NFSIP/$NFSIP/g" *.*
 
 
 #Execution line.
@@ -75,9 +74,9 @@ echo $LDAP > test.sh
 #A variable will be collected: $POSTGRESIP
 
 #Execution line.
-#gcloud compute instances create postgres	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/postgres.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+gcloud compute instances create postgres	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/postgres.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 
-#POSTGRESIP=$(getent hosts postgres.c.nti-310-200201.internal | awk '{ print $1 }')
+POSTGRESIP=$(getent hosts postgres.c.nti-310-200201.internal | awk '{ print $1 }')
 
 
 ########### DJANGO ######################
@@ -87,7 +86,7 @@ echo $LDAP > test.sh
 
 #Additional edits will have to be made to this script (settings.py cannot rely on external file).
 #sed line - should replace all instances of POSTGRESIP with $POSTGRESIP.
-#sed -i "s/POSTGRESIP/$POSTGRESIP/g" *.*
+sed -i "s/POSTGRESIP/$POSTGRESIP/g" *.*
 
 #Execution line.
 #gcloud compute instances create django	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/django.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
