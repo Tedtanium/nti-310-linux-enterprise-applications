@@ -65,8 +65,8 @@ sed -i "s/NFSIP/$NFSIP/g" *.*
 
 
 #Execution line.
-#gcloud compute instances create client	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image ubuntu-16.04-lts --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
-# ^ Needs changing - CentOS => Ubuntu.
+gcloud compute instances create client	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image ubuntu-1604-lts --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+
 
 ############ POSTGRES ####################
 #Fourth is a Postgres server.
@@ -74,9 +74,11 @@ sed -i "s/NFSIP/$NFSIP/g" *.*
 #A variable will be collected: $POSTGRESIP
 
 #Execution line.
-gcloud compute instances create postgres	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image ubuntu-16.04-lts --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+gcloud compute instances create postgres	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/postgres.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 
 POSTGRESIP=$(getent hosts postgres.c.nti-310-200201.internal | awk '{ print $1 }')
+
+echo $POSTGRESIP > postgresip.txt
 
 
 ########### DJANGO ######################
@@ -88,6 +90,9 @@ POSTGRESIP=$(getent hosts postgres.c.nti-310-200201.internal | awk '{ print $1 }
 #sed line - should replace all instances of POSTGRESIP with $POSTGRESIP.
 sed -i "s/POSTGRESIP/$POSTGRESIP/g" *.*
 
+#Creates a firewall rule for port 8000 TCP, to be used in Django.
+gcloud compute firewall-rules create djangoisonfiresomebodycall911 --allow tcp:8000
+
 #Execution line.
-#gcloud compute instances create django	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/django.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
-# ^ Needs firewall rules, for port 8000.
+gcloud compute instances create django	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/django.sh --image centos-7 --tags http-server djangoisonfiresomebodycall911 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+
