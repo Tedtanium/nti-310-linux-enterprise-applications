@@ -49,4 +49,59 @@ server {
 }" > /etc/nginx/conf.d/apivndeveloper.conf
 ######### End of echo statement ###############
 
-#Stopped at 2.1 (https://www.vndeveloper.com/django-behind-uwsgi-nginx-centos-7/)
+systemctl start nginx
+
+django-admin.py startproject /var/www/apivndeveloper
+
+python manage.py runserver 0.0.0.0:8000
+uwsgi --http :8000 --module apivndeveloper.wsgi
+
+useradd -s /bin/false -r uwsgi
+
+- mkdir -p /etc/uwsgi/vassals
+
+
+######### Echo into ini file ###############
+echo -e "[uwsgi]
+# Django-related settings
+# the base directory (full path)
+chdir = /var/www/apivndeveloper
+# Django's wsgi file
+module =apivndeveloper.wsgi
+# the virtualenv (full path)
+home = /var/www/p3venv
+# Logs
+logdate = True
+logto = /var/log/uwsgi/access.log
+# process-related settings
+# master
+master = true
+# maximum number of worker processes
+processes = 5
+# the socket (use the full path to be safe)
+socket = /run/uwsgi/apivndeveloper.sock
+# ... with appropriate permissions - may be needed
+chmod-socket = 666
+# clear environment on exit
+vacuum = true" >> /var/www/apivndeveloper/apivndeveloper_uwsgi.ini
+
+ln -s /var/www/apivndeveloper/apivndeveloper_uwsgi.ini /etc/uwsgi/vassals/
+
+######### Emperor service echo statement ###############
+echo -e "[Unit]
+Description=uWSGI Emperor service
+[Service]
+ExecStartPre=/usr/bin/bash -c 'mkdir -p /run/uwsgi; chown uwsgi:nginx /run/uwsgi'
+ExecStart=/var/www/p3venv/bin/uwsgi --emperor /etc/uwsgi/vassals
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+[Install]
+WantedBy=multi-user.target" >> /etc/systemd/system/uwsgi.service
+######### End of echo statements ###############
+
+
+systemctl stop nginx
+systemctl start uwsgi
+systemctl start nginx
