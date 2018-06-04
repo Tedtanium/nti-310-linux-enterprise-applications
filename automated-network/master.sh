@@ -65,7 +65,7 @@ sed -i "s/NFSIP/$NFSIP/g" *.*
 
 
 #Execution line.
-#gcloud compute instances create client	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image ubuntu --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+#gcloud compute instances create client	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image ubuntu-16.04-lts --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 # ^ Needs changing - CentOS => Ubuntu.
 
 ############ POSTGRES ####################
@@ -74,7 +74,7 @@ sed -i "s/NFSIP/$NFSIP/g" *.*
 #A variable will be collected: $POSTGRESIP
 
 #Execution line.
-gcloud compute instances create postgres	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/postgres.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+gcloud compute instances create postgres	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image ubuntu-16.04-lts --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 
 POSTGRESIP=$(getent hosts postgres.c.nti-310-200201.internal | awk '{ print $1 }')
 
