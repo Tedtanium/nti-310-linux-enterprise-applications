@@ -42,7 +42,7 @@ echo $LDAPIP > ldapip.txt
 #Execution line.
 gcloud compute instances create nfs-server	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/nfs-server.sh --image centos-7 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 
-NFS=$(getent hosts nfs-server.c.nti-310-200201.internal | awk '{ print $1 }')
+NFSIP=$(getent hosts nfs-server.c.nti-310-200201.internal | awk '{ print $1 }')
 
 echo $NFSIP > nfsip.txt
 
