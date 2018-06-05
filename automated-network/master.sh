@@ -58,10 +58,10 @@ echo $NFS > nfsip.txt
 #Note to self: Debconf MUST be integrated into client install! Made independently of the LDAP server.
 
 #sed line - should replace all instances of LDAPIP with $LDAPIP.
-sed -i "s/'LDAPIP'/$LDAPIP/g" *.*
+sed -i "s/'LDAPIP'/$LDAPIP/g" /nti-310-linux-enterprise-applications/automated-network/client.sh 
 
 #sed line - should replace all instances of NFSIP with $NFSIP.
-sed -i "s/'NFSIP'/$NFSIP/g" *.*
+sed -i "s/'NFSIP'/$NFSIP/g" /nti-310-linux-enterprise-applications/automated-network/client.sh 
 
 
 #Execution line.
@@ -88,7 +88,7 @@ echo $POSTGRESIP > postgresip.txt
 
 #Additional edits will have to be made to this script (settings.py cannot rely on external file).
 #sed line - should replace all instances of POSTGRESIP with $POSTGRESIP.
-sed -i "s/POSTGRESIP/$POSTGRESIP/g" *.*
+sed -i "s/POSTGRESIP/$POSTGRESIP/g" /nti-310-linux-enterprise-applications/automated-network/django.sh
 
 #Creates a firewall rule for port 8000 TCP, to be used in Django.
 #gcloud compute firewall-rules create djangoisonfiresomebodycall911 --allow tcp:8000
