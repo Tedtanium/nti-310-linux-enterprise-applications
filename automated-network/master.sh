@@ -25,18 +25,17 @@ gcloud compute instances create ldap-server	--metadata-from-file startup-script=
 
 
 
-LDAP=$(getent hosts ldap-server.c.nti-310-200201.internal | awk '{ print $1 }')
+LDAPIP=$(getent hosts ldap-server.c.nti-310-200201.internal | awk '{ print $1 }')
 
 
 #Verifies that the variable is being stored.
-echo $LDAP > ldapip.txt
+echo $LDAPIP > ldapip.txt
 
 
 
 ################ NFS ######################
 #Secondly, the NFS server needs to be made.
 #Target file: automated-network/nfs-server
-#A variable will be needed: $LDAPIP
 #A variable will be collected: $NFSIP
 
 
@@ -45,7 +44,7 @@ gcloud compute instances create nfs-server	--metadata-from-file startup-script=n
 
 NFS=$(getent hosts nfs-server.c.nti-310-200201.internal | awk '{ print $1 }')
 
-echo $NFS > nfsip.txt
+echo $NFSIP > nfsip.txt
 
 
 
