@@ -96,5 +96,5 @@ sed -i "s/POSTGRESIP/$POSTGRESIP/g" *.*
 
 
 #Execution line.
-gcloud compute instances create django	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/django.sh --image centos-7 --tags http-server djangoisonfiresomebodycall911 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+gcloud compute instances create django	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/django.sh --image centos-7 --tags "http-server","djangoisonfiresomebodycall911" --zone us-east1-b --machine-type f1-micro --scopes cloud-platform 
 
