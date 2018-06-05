@@ -58,10 +58,10 @@ echo $NFS > nfsip.txt
 #Note to self: Debconf MUST be integrated into client install! Made independently of the LDAP server.
 
 #sed line - should replace all instances of LDAPIP with $LDAPIP.
-sed -i "s/'LDAPIP'/$LDAPIP/g" /nti-310-linux-enterprise-applications/automated-network/client.sh 
+sed -i "s/LDAPIP/$LDAPIP/g" /nti-310-linux-enterprise-applications/automated-network/client.sh 
 
 #sed line - should replace all instances of NFSIP with $NFSIP.
-sed -i "s/'NFSIP'/$NFSIP/g" /nti-310-linux-enterprise-applications/automated-network/client.sh 
+sed -i "s/NFSIP/$NFSIP/g" /nti-310-linux-enterprise-applications/automated-network/client.sh 
 
 
 #Execution line.
