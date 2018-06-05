@@ -29,7 +29,7 @@ LDAP=$(getent hosts ldap-server.c.nti-310-200201.internal | awk '{ print $1 }')
 
 
 #Verifies that the variable is being stored.
-echo $LDAP > ldapip.sh
+echo $LDAP > ldapip.txt
 
 
 
@@ -45,7 +45,7 @@ gcloud compute instances create nfs-server	--metadata-from-file startup-script=n
 
 NFS=$(getent hosts nfs-server.c.nti-310-200201.internal | awk '{ print $1 }')
 
-echo $NFS > nfsip.sh
+echo $NFS > nfsip.txt
 
 
 
@@ -58,14 +58,14 @@ echo $NFS > nfsip.sh
 #Note to self: Debconf MUST be integrated into client install! Made independently of the LDAP server.
 
 #sed line - should replace all instances of LDAPIP with $LDAPIP.
-sed -i "s/LDAPIP/$LDAPIP/g" *.*
+sed -i "s/'LDAPIP'/$LDAPIP/g" *.*
 
 #sed line - should replace all instances of NFSIP with $NFSIP.
-sed -i "s/NFSIP/$NFSIP/g" *.*
+sed -i "s/'NFSIP'/$NFSIP/g" *.*
 
 
 #Execution line.
-gcloud compute instances create client	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image ubuntu-1604-lts --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+gcloud compute instances create client	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 
 
 ############ POSTGRES ####################
@@ -91,7 +91,9 @@ echo $POSTGRESIP > postgresip.txt
 sed -i "s/POSTGRESIP/$POSTGRESIP/g" *.*
 
 #Creates a firewall rule for port 8000 TCP, to be used in Django.
-gcloud compute firewall-rules create djangoisonfiresomebodycall911 --allow tcp:8000
+#gcloud compute firewall-rules create djangoisonfiresomebodycall911 --allow tcp:8000
+# ^ This fails and aborts the script if it already exists, so it's commented out here.
+
 
 #Execution line.
 gcloud compute instances create django	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/django.sh --image centos-7 --tags http-server djangoisonfiresomebodycall911 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
