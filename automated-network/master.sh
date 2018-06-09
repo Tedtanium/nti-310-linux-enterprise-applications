@@ -49,7 +49,7 @@ echo $NFSIP > nfsip.txt
 
 
 ############## CLIENT #####################
-#Third comes the LDAP/NFS client.
+#Third comes the LDAP/NFS clients.
 #Target file: automated-network/client.sh
 #Variables needed: $LDAPIP, $NFSIP
 
@@ -63,8 +63,9 @@ sed -i "s/LDAPIP/$LDAPIP/g" /nti-310-linux-enterprise-applications/automated-net
 sed -i "s/NFSIP/$NFSIP/g" /nti-310-linux-enterprise-applications/automated-network/client.sh 
 
 
-#Execution line.
-gcloud compute instances create client	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+#Execution lines.
+gcloud compute instances create client-a	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+gcloud compute instances create client-b	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/client.sh --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
 
 
 ############ POSTGRES ####################
