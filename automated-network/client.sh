@@ -39,4 +39,3 @@ apt-get install nfs-client -y
 yum install nfs-client -y
 mkdir /mnt/test 
 echo "NFSIP:/var/nfsshare/testing        /mnt/test       nfs     defaults 0 0" >> /etc/fstab
-# ^ Might cause issues; the IP may need to be escaped to be read in as a variable.
