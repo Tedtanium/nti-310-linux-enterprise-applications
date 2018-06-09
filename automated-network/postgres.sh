@@ -33,6 +33,8 @@ sudo -i -u postgres psql -U postgres -f /sqlfile.sql
 
 sed -i.bak 's/ident/md5/g' /var/lib/pgsql/data/pg_hba.conf
 sed -i 's/local   all             all                                     peer/local   all             all                                     md5/g' /var/lib/pgsql/data/pg_hba.conf
+sed -i 's|host    all             all             127.0.0.1/32            md5|host    all             all             all            md5|g' /var/lib/pgsql/data/pg_hba.conf
+# ^ new
 
 systemctl start httpd
 systemctl enable httpd
@@ -53,6 +55,10 @@ sed -i 's/Require local/Require all granted/g' /etc/httpd/conf.d/phpPgAdmin.conf
 
 sed -i 's/Allow from 127.0.0.1/Allow from all/g' /etc/httpd/conf.d/phpPgAdmin.conf
 
+sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/data/postgresql.conf
+# ^ new
+sed -i 's/#port/port/g' /var/lib/pgsql/data/postgresql.conf
+# ^ new
 
 systemctl restart httpd
 systemctl restart postgresql
