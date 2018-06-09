@@ -20,8 +20,8 @@ django-admin.py startproject myproject /opt/myproject
 mv /opt/myproject/myproject/settings.py /opt/myproject/myproject/settings.py.bak
 wget https://raw.githubusercontent.com/Tedtanium/nti-310-linux-enterprise-applications/master/django-thing/settings.py --directory-prefix=/opt/myproject/myproject/settings.py
 
-djangoip=$(getent hosts postgres-a.c.nti-310-200201.internal | awk '{ print $1 }')
-sed -i "s|'HOST': '1.2.3.4'|'HOST': 'POSTGRESIP'|g" /opt/myproject/myproject/settings.py
+postgresip=$(getent hosts postgres-a.c.nti-310-200201.internal | awk '{ print $1 }')
+sed -i "s|'HOST': '1.2.3.4'|'HOST': '$postgresip'|g" /opt/myproject/myproject/settings.py
 
 python manage.py migrate
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'pass')" | /opt/myproject/myproject/manage.py shell
