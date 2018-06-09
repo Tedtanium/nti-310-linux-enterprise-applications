@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'myproject',
         'USER': 'myprojectuser',
         'PASSWORD': 'password',
-        'HOST': 'POSTGRESIP',
+        'HOST': '1.2.3.4',
         'PORT': '5432',
     }
 }
