@@ -17,7 +17,7 @@ git clone https://github.com/Tedtanium/nti-310-linux-enterprise-applications.git
 
 
 ################ LDAP #####################
-#Target file: automated-network/ldap-server
+#Target file: automated-network/ldap-server.sh
 #A variable will be collected: $LDAPIP
 
 #Execution line.
@@ -35,7 +35,7 @@ echo $LDAPIP > ldapip.txt
 
 ################ NFS ######################
 #Secondly, the NFS server needs to be made.
-#Target file: automated-network/nfs-server
+#Target file: automated-network/nfs-server.sh
 #A variable will be collected: $NFSIP
 
 
@@ -50,7 +50,7 @@ echo $NFSIP > nfsip.txt
 
 ############## CLIENT #####################
 #Third comes the LDAP/NFS client.
-#Target file: automated-network/client
+#Target file: automated-network/client.sh
 #Variables needed: $LDAPIP, $NFSIP
 
 
@@ -69,7 +69,7 @@ gcloud compute instances create client	--metadata-from-file startup-script=nti-3
 
 ############ POSTGRES ####################
 #Fourth is a Postgres server.
-#Target file: automated-network/postgres
+#Target file: automated-network/postgres.sh
 #A variable will be collected: $POSTGRESIP
 
 #Execution line.
@@ -82,7 +82,7 @@ echo $POSTGRESIP > postgresip.txt
 
 ########### DJANGO ######################
 #Fifth and finally, a Django server.
-#Target file: automated-network/django
+#Target file: automated-network/django.sh
 #A variable will be needed: $POSTGRESIP
 
 #Additional edits will have to be made to this script (settings.py cannot rely on external file).
@@ -97,3 +97,8 @@ sed -i "s/POSTGRESIP/$POSTGRESIP/g" /nti-310-linux-enterprise-applications/autom
 #Execution line.
 gcloud compute instances create django --metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/django.sh --image centos-7 --tags "http-server","djangoisonfiresomebodycall911" --zone us-east1-b --machine-type f1-micro --scopes cloud-platform 
 
+############## LOAD BALANCER ##############
+#Spins up the load balancer.
+#Target file: automated-network/load-balancer.sh
+#Execution line.
+gcloud compute instances create load-balancer	--metadata-from-file startup-script=nti-310-linux-enterprise-applications/automated-network/load-balancer.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
