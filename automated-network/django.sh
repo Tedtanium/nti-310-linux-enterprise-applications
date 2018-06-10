@@ -26,8 +26,9 @@ mv /opt/myproject/myproject/settings.py /settings.py.bak
 wget https://raw.githubusercontent.com/Tedtanium/nti-310-linux-enterprise-applications/master/django-thing/settings.py --directory-prefix=/opt/myproject/myproject/
 
 postgresip=$(getent hosts postgres.c.nti-310-200201.internal | awk '{ print $1 }')
+
 sed -i "s|'HOST': '1.2.3.4'|'HOST': '$postgresip'|g" /opt/myproject/myproject/settings.py
-sed -i "s/ALLOWED_HOSTS = []/ALLOWED HOSTS = ['*']/g" /opt/myproject/myproject/settings.py
+sed -i "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS =  \[\'"*"\'\]/g" /opt/myproject/myproject/settings.py
 
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'pass')" | /opt/myproject/manage.py shell
 
