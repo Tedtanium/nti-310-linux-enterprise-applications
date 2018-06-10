@@ -1,5 +1,6 @@
 #!/bin/bash
 
+if [ -e /etc/ldap.conf ]; then exit 0; fi
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get --yes install libpam-ldap nscd
@@ -27,10 +28,14 @@ sed -i 's/PasswordAuthentication no/PasswordAuthentication Yes/g' /etc/ssh/sshd_
 
 /etc/init.d/nscd restart
 
-export DEBIAN_FRONTEND=interactive
-
 sed -i 's,uri ldapi:///,uri ldap://LDAPIP,g' /etc/ldap.conf
 sed -i 's/base dc=example,dc=net/base dc=capstone,dc=local/g' /etc/ldap.conf
+
+/etc/init.d/nscd restart
+
+export DEBIAN_FRONTEND=interactive
+
+
 #To test: Go into the client and use [getent passwd | grep 500].
 
 #NFS client starts here.
