@@ -1,5 +1,6 @@
 #!/bin/bash
 
+if [ -e /etc/ldap.conf ]; then exit 0; fi
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get --yes install libpam-ldap nscd
