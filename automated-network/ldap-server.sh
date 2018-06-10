@@ -1,6 +1,6 @@
 #!/bin/bash
-yum install git -y
-git clone https://github.com/nic-instruction/hello-nti-310.git
+yum install wget -y
+wget https://raw.githubusercontent.com/Tedtanium/nti-310-linux-enterprise-applications/master/automated-network/dependent-files/config.php
 
 yum install -y openldap-servers openldap-clients
 
@@ -24,7 +24,7 @@ sed -i 's,Require local,#Require local\n   Require all granted,g' /etc/httpd/con
 
 unalias cp
 
-cp hello-nti-310/config/config.php /etc/phpldapadmin/config.php
+cp /config.php /etc/phpldapadmin/config.php
 chown ldap:apache /etc/phpldapadmin/config.php
 
 systemctl restart httpd.service
