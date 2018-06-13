@@ -28,7 +28,7 @@ sed -i 's/PasswordAuthentication no/PasswordAuthentication Yes/g' /etc/ssh/sshd_
 
 export DEBIAN_FRONTEND=interactive
 
-sed -i 's,uri ldapi:///,uri ldap:///LDAPIP,g' /etc/ldap.conf
+sed -i 's,uri ldapi:///,uri ldap://LDAPIP,g' /etc/ldap.conf
 sed -i 's/base dc=example,dc=net/base dc=nti310,dc=local/g' /etc/ldap.conf
 #To test: Go into the client and use [getent passwd | grep 500].
 
