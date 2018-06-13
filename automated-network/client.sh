@@ -20,8 +20,6 @@ ldap-auth-config        ldap-auth-config/dblogin        boolean false" > ldap_de
 
 while read line; do echo "$line" | debconf-set-selections; done < ldap_debconf
 
-apt-get install -y libpam-ldap nscd
-
 sed -i 's/compat/compat ldap/g' /etc/nsswitch.conf
 
 sed -i 's/PasswordAuthentication no/PasswordAuthentication Yes/g' /etc/ssh/sshd_config
@@ -30,7 +28,7 @@ sed -i 's/PasswordAuthentication no/PasswordAuthentication Yes/g' /etc/ssh/sshd_
 
 export DEBIAN_FRONTEND=interactive
 
-sed -i 's,uri ldapi:///,uri ldap://LDAPIP,g' /etc/ldap.conf
+sed -i 's,uri ldapi:///,uri ldap:///LDAPIP,g' /etc/ldap.conf
 sed -i 's/base dc=example,dc=net/base dc=nti310,dc=local/g' /etc/ldap.conf
 #To test: Go into the client and use [getent passwd | grep 500].
 
